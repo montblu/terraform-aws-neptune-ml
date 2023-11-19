@@ -1,3 +1,8 @@
+0.1.2 - 2023-11-19
+==================
+- Fix identifier for final snapshot of Neptune cluster.
+- Require non-empty list for input variable neptune_subnet_ids.
+
 0.1.1 - 2023-11-19
 ==================
 - Remove default value of variable `neptune_subnet_ids`.
