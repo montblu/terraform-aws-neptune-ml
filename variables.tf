@@ -41,7 +41,6 @@ variable "neptune_subnet_ids" {
     EOF
   type        = list(string)
   nullable    = false
-  default     = []
 }
 
 variable "extra_subnet_ids" {

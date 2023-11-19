@@ -116,7 +116,7 @@ Contributions are welcome.
 | <a name="input_neptune_maintenance_window"></a> [neptune\_maintenance\_window](#input\_neptune\_maintenance\_window) | Window of time to run maintenance of Neptune cluster. | `string` | `"sat:22:00-sun:04:00"` | no |
 | <a name="input_neptune_port"></a> [neptune\_port](#input\_neptune\_port) | The port which Neptune will expose. | `number` | `8182` | no |
 | <a name="input_neptune_skip_final_snapshot"></a> [neptune\_skip\_final\_snapshot](#input\_neptune\_skip\_final\_snapshot) | Whether or not to skip taking a snapshot of the database before deletion. | `bool` | `false` | no |
-| <a name="input_neptune_subnet_ids"></a> [neptune\_subnet\_ids](#input\_neptune\_subnet\_ids) | IDs of subnets to set up NeptuneML resources running in. | `list(string)` | `[]` | no |
+| <a name="input_neptune_subnet_ids"></a> [neptune\_subnet\_ids](#input\_neptune\_subnet\_ids) | IDs of subnets to set up NeptuneML resources running in. | `list(string)` | n/a | yes |
 | <a name="input_pgp_key"></a> [pgp\_key](#input\_pgp\_key) | For IAM user secret key. A base-64 encoded PGP public key, or a keybase<br>username in the form keybase:some\_person\_that\_exists. If PGP key, provide<br>\"unarmored\" version (e.g. avoid passing the `-a` option to gpg `--export`). | `string` | `null` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | A name to add as prefix or suffix created resources.<br>Can be environment, like `test` or `prod`. | `string` | `""` | no |
 | <a name="input_route_table_ids"></a> [route\_table\_ids](#input\_route\_table\_ids) | IDs of route tables to add to S3 VPC Endpoint. | `list(string)` | `[]` | no |
