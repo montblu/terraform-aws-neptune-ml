@@ -41,6 +41,11 @@ variable "neptune_subnet_ids" {
     EOF
   type        = list(string)
   nullable    = false
+
+  validation {
+    condition     = length(var.neptune_subnet_ids) > 0
+    error_message = "List must be non-empty."
+  }
 }
 
 variable "extra_subnet_ids" {
