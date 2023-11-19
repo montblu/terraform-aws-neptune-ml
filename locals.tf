@@ -10,7 +10,7 @@ locals {
   final_snapshot_identifier = (
     local.identifier == random_id.this.hex
     ? "${local.database_name}-final-snapshot"
-    : "${local.database_name}-final-snapshot-${local.identifier}"
+    : "${local.database_name}-final-snapshot-${random_id.this.hex}"
   )
 
   neptune_major_version = split(".", var.neptune_engine_version)[1]
