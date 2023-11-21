@@ -1,7 +1,13 @@
+0.1.3 - 2023-11-21
+==================
+- Require input variable `vpc_id`.
+- Rename input variable `database_min_instances` to `cluster_instance_count`.
+- Update variable descriptions.
+
 0.1.2 - 2023-11-19
 ==================
 - Fix identifier for final snapshot of Neptune cluster.
-- Require non-empty list for input variable neptune_subnet_ids.
+- Require non-empty list for input variable `neptune_subnet_ids`.
 
 0.1.1 - 2023-11-19
 ==================
