@@ -259,7 +259,7 @@ resource "aws_neptune_cluster" "neptune" {
 }
 
 resource "aws_neptune_cluster_instance" "neptune" {
-  count = var.database_min_instances
+  count = var.cluster_instance_count
 
   identifier         = "${local.database_name}-${count.index + 1}"
   instance_class     = var.database_instance_type

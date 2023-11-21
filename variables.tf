@@ -178,7 +178,7 @@ variable "database_instance_type" {
   default     = "db.t3.medium"
 }
 
-variable "database_min_instances" {
+variable "cluster_instance_count" {
   description = <<-EOF
     Number of instances to run in Neptune cluster.
     EOF
