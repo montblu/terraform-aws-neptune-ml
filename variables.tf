@@ -14,7 +14,6 @@ variable "vpc_id" {
     EOF
   type        = string
   nullable    = false
-  default     = ""
 }
 
 variable "vpc_endpoint_security_group_ids" {

@@ -126,7 +126,7 @@ Contributions are welcome.
 | <a name="input_serverless_min_capacity"></a> [serverless\_min\_capacity](#input\_serverless\_min\_capacity) | Minimum Neptune Capacity Units (NCUs) for serverless scaling configuration. | `number` | `0` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to add to resources. | `map(string)` | `{}` | no |
 | <a name="input_vpc_endpoint_security_group_ids"></a> [vpc\_endpoint\_security\_group\_ids](#input\_vpc\_endpoint\_security\_group\_ids) | IDs of security groups allowed to access VPC endpoints. | `list(string)` | `[]` | no |
-| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC to set up Neptune in. | `string` | `""` | no |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC to set up Neptune in. | `string` | n/a | yes |
 
 ## Outputs
 
