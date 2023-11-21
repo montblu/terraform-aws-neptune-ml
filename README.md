@@ -100,14 +100,14 @@ Contributions are welcome.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_batch_compute_instance_types"></a> [batch\_compute\_instance\_types](#input\_batch\_compute\_instance\_types) | List of instance types to use for Batch compute environments. | `list(string)` | <pre>[<br>  "c5"<br>]</pre> | no |
-| <a name="input_cluster_parameter_group"></a> [cluster\_parameter\_group](#input\_cluster\_parameter\_group) | Configuration parameters for database cluster as a map of string to any. | `map(any)` | <pre>{<br>  "neptune_autoscaling_config": "{}",<br>  "neptune_enable_audit_log": 1,<br>  "neptune_lab_mode": "NeptuneML=enabled",<br>  "neptune_lookup_cache": 1,<br>  "neptune_query_timeout": 120000,<br>  "neptune_streams": 0<br>}</pre> | no |
+| <a name="input_cluster_parameter_group"></a> [cluster\_parameter\_group](#input\_cluster\_parameter\_group) | Configuration parameters for Neptune cluster as a map of string to any. | `map(any)` | <pre>{<br>  "neptune_autoscaling_config": "{}",<br>  "neptune_enable_audit_log": 1,<br>  "neptune_lab_mode": "NeptuneML=enabled",<br>  "neptune_lookup_cache": 1,<br>  "neptune_query_timeout": 120000,<br>  "neptune_streams": 0<br>}</pre> | no |
 | <a name="input_create_iam_user"></a> [create\_iam\_user](#input\_create\_iam\_user) | Whether or not to create an IAM user with assumable role to access Neptune<br>ML resources. If true, variable 'neptune\_iam\_authentication' should also be<br>set to true, and variable 'pgp\_key' should also be provided, otherwise the<br>user's secret key will be stored in plain text in the Terraform state file. | `bool` | `false` | no |
 | <a name="input_database_instance_type"></a> [database\_instance\_type](#input\_database\_instance\_type) | Neptune DB instance type. | `string` | `"db.t3.medium"` | no |
-| <a name="input_database_min_instances"></a> [database\_min\_instances](#input\_database\_min\_instances) | How many instances to run at a minimum. | `number` | `1` | no |
+| <a name="input_database_min_instances"></a> [database\_min\_instances](#input\_database\_min\_instances) | Number of instances to run in Neptune cluster. | `number` | `1` | no |
 | <a name="input_extra_subnet_ids"></a> [extra\_subnet\_ids](#input\_extra\_subnet\_ids) | IDs of other subnets where requests to Neptune may originate from. | `list(string)` | `[]` | no |
-| <a name="input_instance_parameter_group"></a> [instance\_parameter\_group](#input\_instance\_parameter\_group) | Configuration parameters for instances as a map of string to any. | `map(any)` | <pre>{<br>  "neptune_dfe_query_engine": "viaQueryHint",<br>  "neptune_query_timeout": 120000,<br>  "neptune_result_cache": 0<br>}</pre> | no |
-| <a name="input_kms_admin_role_names"></a> [kms\_admin\_role\_names](#input\_kms\_admin\_role\_names) | Names of additional IAM roles that will be administrators of the<br>KMS key. Not required, but very recommended. Root is always added. | `list(string)` | `[]` | no |
-| <a name="input_kms_admin_user_names"></a> [kms\_admin\_user\_names](#input\_kms\_admin\_user\_names) | Names of additional IAM users that will be administrators of the<br>KMS key. Not required, but very recommended. Root is always added. | `list(string)` | `[]` | no |
+| <a name="input_instance_parameter_group"></a> [instance\_parameter\_group](#input\_instance\_parameter\_group) | Configuration parameters for Neptune instances as a map of string to any. | `map(any)` | <pre>{<br>  "neptune_dfe_query_engine": "viaQueryHint",<br>  "neptune_query_timeout": 120000,<br>  "neptune_result_cache": 0<br>}</pre> | no |
+| <a name="input_kms_admin_role_names"></a> [kms\_admin\_role\_names](#input\_kms\_admin\_role\_names) | Names of additional IAM roles that will be administrators of the<br>KMS key. Not required, but strongly recommended. Root is always added. | `list(string)` | `[]` | no |
+| <a name="input_kms_admin_user_names"></a> [kms\_admin\_user\_names](#input\_kms\_admin\_user\_names) | Names of additional IAM users that will be administrators of the<br>KMS key. Not required, but strongly recommended. Root is always added. | `list(string)` | `[]` | no |
 | <a name="input_neptune_allow_major_version_upgrade"></a> [neptune\_allow\_major\_version\_upgrade](#input\_neptune\_allow\_major\_version\_upgrade) | Whether or not to allow automatic major version upgrades of Neptune<br>cluster. | `bool` | `true` | no |
 | <a name="input_neptune_apply_immediately"></a> [neptune\_apply\_immediately](#input\_neptune\_apply\_immediately) | Whether or not to apply changes to Neptune immediately or wait for<br>maintenance window. | `bool` | `false` | no |
 | <a name="input_neptune_backup_window"></a> [neptune\_backup\_window](#input\_neptune\_backup\_window) | Window of time to run backups of Neptune cluster. | `string` | `"07:00-09:00"` | no |
@@ -116,9 +116,9 @@ Contributions are welcome.
 | <a name="input_neptune_maintenance_window"></a> [neptune\_maintenance\_window](#input\_neptune\_maintenance\_window) | Window of time to run maintenance of Neptune cluster. | `string` | `"sat:22:00-sun:04:00"` | no |
 | <a name="input_neptune_port"></a> [neptune\_port](#input\_neptune\_port) | The port which Neptune will expose. | `number` | `8182` | no |
 | <a name="input_neptune_skip_final_snapshot"></a> [neptune\_skip\_final\_snapshot](#input\_neptune\_skip\_final\_snapshot) | Whether or not to skip taking a snapshot of the database before deletion. | `bool` | `false` | no |
-| <a name="input_neptune_subnet_ids"></a> [neptune\_subnet\_ids](#input\_neptune\_subnet\_ids) | IDs of subnets to set up NeptuneML resources running in. | `list(string)` | n/a | yes |
+| <a name="input_neptune_subnet_ids"></a> [neptune\_subnet\_ids](#input\_neptune\_subnet\_ids) | IDs of VPC subnets to set up Neptune ML resources in. | `list(string)` | n/a | yes |
 | <a name="input_pgp_key"></a> [pgp\_key](#input\_pgp\_key) | For IAM user secret key. A base-64 encoded PGP public key, or a keybase<br>username in the form keybase:some\_person\_that\_exists. If PGP key, provide<br>\"unarmored\" version (e.g. avoid passing the `-a` option to gpg `--export`). | `string` | `null` | no |
-| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | A name to add as prefix or suffix created resources.<br>Can be environment, like `test` or `prod`. | `string` | `""` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | A name to add as prefix or suffix created resources.<br>For example environment, like `test` or `prod`, or company name. | `string` | `""` | no |
 | <a name="input_route_table_ids"></a> [route\_table\_ids](#input\_route\_table\_ids) | IDs of route tables to add to S3 VPC Endpoint. | `list(string)` | `[]` | no |
 | <a name="input_sagemaker_notebook_instance_type"></a> [sagemaker\_notebook\_instance\_type](#input\_sagemaker\_notebook\_instance\_type) | The instance type of the SageMaker notebook. | `string` | `"ml.t3.medium"` | no |
 | <a name="input_sagemaker_notebook_platform_id"></a> [sagemaker\_notebook\_platform\_id](#input\_sagemaker\_notebook\_platform\_id) | The platform ID of the SageMaker notebook. | `string` | `"notebook-al2-v1"` | no |
@@ -126,7 +126,7 @@ Contributions are welcome.
 | <a name="input_serverless_min_capacity"></a> [serverless\_min\_capacity](#input\_serverless\_min\_capacity) | Minimum Neptune Capacity Units (NCUs) for serverless scaling configuration. | `number` | `0` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to add to resources. | `map(string)` | `{}` | no |
 | <a name="input_vpc_endpoint_security_group_ids"></a> [vpc\_endpoint\_security\_group\_ids](#input\_vpc\_endpoint\_security\_group\_ids) | IDs of security groups allowed to access VPC endpoints. | `list(string)` | `[]` | no |
-| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC to set up Postgres in. | `string` | `""` | no |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC to set up Neptune in. | `string` | `""` | no |
 
 ## Outputs
 

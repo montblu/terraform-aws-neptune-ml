@@ -1,7 +1,7 @@
 variable "resource_group_name" {
   description = <<-EOF
     A name to add as prefix or suffix created resources.
-    Can be environment, like `test` or `prod`.
+    For example environment, like `test` or `prod`, or company name.
     EOF
   type        = string
   nullable    = false
@@ -10,7 +10,7 @@ variable "resource_group_name" {
 
 variable "vpc_id" {
   description = <<-EOF
-    The ID of the VPC to set up Postgres in.
+    The ID of the VPC to set up Neptune in.
     EOF
   type        = string
   nullable    = false
@@ -37,7 +37,7 @@ variable "route_table_ids" {
 
 variable "neptune_subnet_ids" {
   description = <<-EOF
-    IDs of subnets to set up NeptuneML resources running in.
+    IDs of VPC subnets to set up Neptune ML resources in.
     EOF
   type        = list(string)
   nullable    = false
@@ -60,7 +60,7 @@ variable "extra_subnet_ids" {
 variable "kms_admin_user_names" {
   description = <<-EOF
     Names of additional IAM users that will be administrators of the
-    KMS key. Not required, but very recommended. Root is always added.
+    KMS key. Not required, but strongly recommended. Root is always added.
     EOF
   type        = list(string)
   nullable    = false
@@ -70,7 +70,7 @@ variable "kms_admin_user_names" {
 variable "kms_admin_role_names" {
   description = <<-EOF
     Names of additional IAM roles that will be administrators of the
-    KMS key. Not required, but very recommended. Root is always added.
+    KMS key. Not required, but strongly recommended. Root is always added.
     EOF
   type        = list(string)
   nullable    = false
@@ -180,7 +180,7 @@ variable "database_instance_type" {
 
 variable "database_min_instances" {
   description = <<-EOF
-    How many instances to run at a minimum.
+    Number of instances to run in Neptune cluster.
     EOF
   type        = number
   nullable    = false
@@ -190,7 +190,7 @@ variable "database_min_instances" {
 variable "cluster_parameter_group" {
   # https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html
   description = <<-EOF
-    Configuration parameters for database cluster as a map of string to any.
+    Configuration parameters for Neptune cluster as a map of string to any.
     EOF
   type        = map(any)
   nullable    = false
@@ -207,7 +207,7 @@ variable "cluster_parameter_group" {
 variable "instance_parameter_group" {
   # https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html
   description = <<-EOF
-    Configuration parameters for instances as a map of string to any.
+    Configuration parameters for Neptune instances as a map of string to any.
     EOF
   type        = map(any)
   nullable    = false
