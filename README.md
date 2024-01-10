@@ -28,19 +28,19 @@ Contributions are welcome.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_api_gateway"></a> [api\_gateway](#module\_api\_gateway) | ./modules/role | n/a |
-| <a name="module_batch_execution"></a> [batch\_execution](#module\_batch\_execution) | ./modules/role | n/a |
-| <a name="module_batch_job"></a> [batch\_job](#module\_batch\_job) | ./modules/role | n/a |
-| <a name="module_ec2"></a> [ec2](#module\_ec2) | ./modules/role | n/a |
-| <a name="module_lambda_execution"></a> [lambda\_execution](#module\_lambda\_execution) | ./modules/role | n/a |
+| <a name="module_api_gateway"></a> [api\_gateway](#module\_api\_gateway) | ./modules/service-role | n/a |
+| <a name="module_batch_execution"></a> [batch\_execution](#module\_batch\_execution) | ./modules/service-role | n/a |
+| <a name="module_batch_job"></a> [batch\_job](#module\_batch\_job) | ./modules/service-role | n/a |
+| <a name="module_ec2"></a> [ec2](#module\_ec2) | ./modules/service-role | n/a |
+| <a name="module_lambda_execution"></a> [lambda\_execution](#module\_lambda\_execution) | ./modules/service-role | n/a |
 | <a name="module_neptune_export_gateway"></a> [neptune\_export\_gateway](#module\_neptune\_export\_gateway) | ./modules/gateway-lambda-integration | n/a |
 | <a name="module_neptune_export_gateway_proxy"></a> [neptune\_export\_gateway\_proxy](#module\_neptune\_export\_gateway\_proxy) | ./modules/gateway-lambda-integration | n/a |
 | <a name="module_neptune_export_lambda"></a> [neptune\_export\_lambda](#module\_neptune\_export\_lambda) | ./modules/lambda | n/a |
 | <a name="module_neptune_export_status_lambda"></a> [neptune\_export\_status\_lambda](#module\_neptune\_export\_status\_lambda) | ./modules/lambda | n/a |
-| <a name="module_neptune_ml_iam"></a> [neptune\_ml\_iam](#module\_neptune\_ml\_iam) | ./modules/role | n/a |
-| <a name="module_neptune_user"></a> [neptune\_user](#module\_neptune\_user) | ./modules/role | n/a |
-| <a name="module_s3"></a> [s3](#module\_s3) | ./modules/role | n/a |
-| <a name="module_sagemaker_execution"></a> [sagemaker\_execution](#module\_sagemaker\_execution) | ./modules/role | n/a |
+| <a name="module_neptune_ml_iam"></a> [neptune\_ml\_iam](#module\_neptune\_ml\_iam) | ./modules/service-role | n/a |
+| <a name="module_neptune_user"></a> [neptune\_user](#module\_neptune\_user) | ./modules/service-role | n/a |
+| <a name="module_s3"></a> [s3](#module\_s3) | ./modules/service-role | n/a |
+| <a name="module_sagemaker_execution"></a> [sagemaker\_execution](#module\_sagemaker\_execution) | ./modules/service-role | n/a |
 
 ## Resources
 

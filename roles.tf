@@ -1,5 +1,5 @@
 module "s3" {
-  source    = "./modules/role"
+  source    = "./modules/service-role"
   role_name = "NeptuneMLLoadFromS3"
 
   principal_identifiers = [
@@ -31,7 +31,7 @@ module "s3" {
 }
 
 module "api_gateway" {
-  source    = "./modules/role"
+  source    = "./modules/service-role"
   role_name = "NeptuneMLApiGatewayLogs"
 
   principal_identifiers = [
@@ -59,7 +59,7 @@ module "api_gateway" {
 }
 
 module "ec2" {
-  source = "./modules/role"
+  source = "./modules/service-role"
 
   role_name               = "NeptuneMLEC2Client"
   aws_managed_policy_name = "AmazonEC2ContainerServiceforEC2Role"
@@ -73,7 +73,7 @@ module "ec2" {
 }
 
 module "batch_execution" {
-  source = "./modules/role"
+  source = "./modules/service-role"
 
   role_name               = "NeptuneMLBatchExecution"
   aws_managed_policy_name = "AWSBatchServiceRole"
@@ -130,7 +130,7 @@ module "batch_execution" {
 }
 
 module "batch_job" {
-  source    = "./modules/role"
+  source    = "./modules/service-role"
   role_name = "NeptuneMLBatchJob"
 
   principal_identifiers = [
@@ -215,7 +215,7 @@ module "batch_job" {
 }
 
 module "neptune_ml_iam" {
-  source    = "./modules/role"
+  source    = "./modules/service-role"
   role_name = "NeptuneMLIAM"
 
   principal_identifiers = [
@@ -354,7 +354,7 @@ module "neptune_ml_iam" {
 }
 
 module "sagemaker_execution" {
-  source    = "./modules/role"
+  source    = "./modules/service-role"
   role_name = "NeptuneMLSagemakerExecution"
 
   principal_identifiers = [
@@ -459,7 +459,7 @@ module "sagemaker_execution" {
 }
 
 module "lambda_execution" {
-  source    = "./modules/role"
+  source    = "./modules/service-role"
   role_name = "NeptuneMLLambdaExecution"
 
   principal_identifiers = [
@@ -547,7 +547,7 @@ module "lambda_execution" {
 module "neptune_user" {
   count = var.create_iam_user ? 1 : 0
 
-  source    = "./modules/role"
+  source    = "./modules/service-role"
   role_name = "NeptuneMLUser"
 
   aws_managed_policy_name = "NeptuneReadOnlyAccess"
