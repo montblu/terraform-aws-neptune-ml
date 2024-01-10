@@ -52,7 +52,7 @@ module "api_gateway" {
         "logs:PutLogEvents",
       ]
       resources = [
-        "arn:aws:logs:${local.aws_region}:${local.account_id}:*",
+        "${local.iam_logs_prefix}:*",
       ]
       conditions = []
     },
@@ -100,7 +100,7 @@ module "batch_execution" {
         "logs:DescribeLogGroups",
       ]
       resources = [
-        "arn:aws:logs:${local.aws_region}:${local.account_id}:log-group::log-stream:*",
+        "${local.iam_logs_prefix}:log-group::log-stream:*",
       ]
       conditions = []
     },
@@ -173,7 +173,7 @@ module "batch_job" {
         "neptune-db:*",
       ]
       resources = [
-        "arn:aws:neptune-db:${local.aws_region}:${local.account_id}:${aws_neptune_cluster.neptune.cluster_resource_id}/*",
+        "${local.neptune_cluster_resource_arn}/*",
       ]
       conditions = []
     },
@@ -306,7 +306,7 @@ module "neptune_ml_iam" {
         "logs:PutLogEvents",
       ]
       resources = [
-        "arn:aws:logs:${local.aws_region}:${local.account_id}:log-group:/aws/sagemaker/*",
+        "${local.iam_logs_prefix}:log-group:/aws/sagemaker/*",
       ]
       conditions = []
     },
@@ -417,7 +417,7 @@ module "sagemaker_execution" {
         "neptune-db:*",
       ]
       resources = [
-        "arn:aws:neptune-db:${local.aws_region}:${local.account_id}:${aws_neptune_cluster.neptune.cluster_resource_id}/*",
+        "${local.neptune_cluster_resource_arn}/*",
       ]
       conditions = []
     },
@@ -501,7 +501,7 @@ module "lambda_execution" {
         "logs:CreateLogGroup",
       ]
       resources = [
-        "arn:aws:logs:${local.aws_region}:${local.account_id}:*",
+        "${local.iam_logs_prefix}:*",
       ]
       conditions = []
     },
@@ -512,7 +512,7 @@ module "lambda_execution" {
         "logs:PutLogEvents",
       ]
       resources = [
-        "arn:aws:logs:${local.aws_region}:${local.account_id}:log-group:/aws/lambda/*:*",
+        "${local.iam_logs_prefix}:log-group:/aws/lambda/*:*",
       ]
       conditions = []
     },
@@ -550,7 +550,7 @@ module "lambda_execution" {
         "batch:SubmitJob",
       ]
       resources = [
-        "arn:aws:batch:${local.aws_region}:${local.account_id}:job-definition/${aws_batch_job_definition.neptune.name}",
+        "${local.iam_batch_prefix}:job-definition/${aws_batch_job_definition.neptune.name}",
         "${aws_batch_job_queue.neptune.arn}*",
       ]
       conditions = []
@@ -560,7 +560,7 @@ module "lambda_execution" {
         "batch:TerminateJob",
       ]
       resources = [
-        "arn:aws:batch:${local.aws_region}:${local.account_id}:job/${aws_batch_job_definition.neptune.name}*",
+        "${local.iam_batch_prefix}:job/${aws_batch_job_definition.neptune.name}*",
         "${aws_batch_job_queue.neptune.arn}*",
       ]
       conditions = []
@@ -609,7 +609,7 @@ module "neptune_user" {
         "neptune-db:StartMLModelTransformJob",
       ]
       resources = [
-        "arn:aws:neptune-db:${local.aws_region}:${local.account_id}:${aws_neptune_cluster.neptune.cluster_resource_id}/*",
+        "${local.neptune_cluster_resource_arn}/*",
       ]
       conditions = []
     },

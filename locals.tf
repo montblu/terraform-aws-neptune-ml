@@ -21,6 +21,12 @@ locals {
     : "neptune1"
   )
 
+  iam_logs_prefix = "arn:aws:logs:${local.aws_region}:${local.account_id}"
+
+  iam_batch_prefix = "arn:aws:batch:${local.aws_region}:${local.account_id}"
+
+  neptune_cluster_resource_arn = "arn:aws:neptune-db:${local.aws_region}:${local.account_id}:${aws_neptune_cluster.neptune.cluster_resource_id}"
+
   extra_subnets_cidr_blocks = [for subnet in data.aws_subnet.extra : subnet.cidr_block]
 
   neptune_export_jar_uri = "https://s3.amazonaws.com/aws-neptune-customer-samples/neptune-export/bin/neptune-export.jar"
