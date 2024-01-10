@@ -1,3 +1,9 @@
+0.1.4 - 2024-01-11
+==================
+- Rename internal module role to service-role.
+- Set input variable object property 'conditions' as optional with default value/
+- Replace some duplicated ARNs with local values.
+
 0.1.3 - 2023-11-21
 ==================
 - Require input variable `vpc_id`.
