@@ -16,7 +16,6 @@ module "s3" {
         aws_s3_bucket.neptune.arn,
         "${aws_s3_bucket.neptune.arn}/*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -25,7 +24,6 @@ module "s3" {
       resources = [
         aws_kms_key.neptune.arn,
       ]
-      conditions = []
     },
   ]
 
@@ -54,7 +52,6 @@ module "api_gateway" {
       resources = [
         "${local.iam_logs_prefix}:*",
       ]
-      conditions = []
     },
   ]
 
@@ -93,7 +90,6 @@ module "batch_execution" {
       resources = [
         "${aws_cloudwatch_log_group.batch.arn}:*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -102,7 +98,6 @@ module "batch_execution" {
       resources = [
         "${local.iam_logs_prefix}:log-group::log-stream:*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -111,7 +106,6 @@ module "batch_execution" {
       resources = [
         "*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -120,7 +114,6 @@ module "batch_execution" {
       resources = [
         "arn:aws:ec2:${local.aws_region}:${local.account_id}:*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -130,7 +123,6 @@ module "batch_execution" {
       resources = [
         aws_kms_key.neptune.arn,
       ]
-      conditions = []
     },
   ]
 
@@ -153,7 +145,6 @@ module "batch_job" {
       resources = [
         "arn:aws:cloudwatch:${local.aws_region}:${local.account_id}:*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -166,7 +157,6 @@ module "batch_job" {
       resources = [
         "${aws_cloudwatch_log_group.batch.arn}:*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -175,7 +165,6 @@ module "batch_job" {
       resources = [
         "${local.neptune_cluster_resource_arn}/*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -199,7 +188,6 @@ module "batch_job" {
       resources = [
         "arn:aws:rds:${local.aws_region}:${local.account_id}:*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -210,7 +198,6 @@ module "batch_job" {
       resources = [
         aws_kms_key.neptune.arn,
       ]
-      conditions = []
     },
     {
       actions = [
@@ -221,7 +208,6 @@ module "batch_job" {
       resources = [
         "arn:aws:s3:::*",
       ]
-      conditions = []
     },
   ]
 
@@ -256,7 +242,6 @@ module "neptune_ml_iam" {
       resources = [
         "*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -269,7 +254,6 @@ module "neptune_ml_iam" {
         "*",
         "arn:aws:ecr:*:*:repository/*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -297,7 +281,6 @@ module "neptune_ml_iam" {
       resources = [
         aws_kms_key.neptune.arn,
       ]
-      conditions = []
     },
     {
       actions = [
@@ -308,7 +291,6 @@ module "neptune_ml_iam" {
       resources = [
         "${local.iam_logs_prefix}:log-group:/aws/sagemaker/*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -340,7 +322,6 @@ module "neptune_ml_iam" {
       resources = [
         "arn:aws:sagemaker:${local.aws_region}:${local.account_id}:*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -354,7 +335,6 @@ module "neptune_ml_iam" {
       resources = [
         "*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -367,7 +347,6 @@ module "neptune_ml_iam" {
       resources = [
         "arn:aws:s3:::*",
       ]
-      conditions = []
     },
   ]
 
@@ -390,7 +369,6 @@ module "sagemaker_execution" {
       resources = [
         "arn:aws:cloudwatch:${local.aws_region}:${local.account_id}:*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -410,7 +388,6 @@ module "sagemaker_execution" {
         "${aws_cloudwatch_log_group.sagemaker_notebook.arn}:*",
         "${aws_cloudwatch_log_group.sagemaker_processing.arn}:*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -419,7 +396,6 @@ module "sagemaker_execution" {
       resources = [
         "${local.neptune_cluster_resource_arn}/*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -433,7 +409,6 @@ module "sagemaker_execution" {
         "arn:aws:s3:::aws-neptune-notebook",
         "arn:aws:s3:::aws-neptune-notebook/*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -442,7 +417,6 @@ module "sagemaker_execution" {
       resources = [
         "arn:aws:execute-api:${local.aws_region}:${local.account_id}:*/*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -459,7 +433,6 @@ module "sagemaker_execution" {
       resources = [
         "arn:aws:sagemaker:${local.aws_region}:${local.account_id}:*/*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -471,7 +444,6 @@ module "sagemaker_execution" {
       resources = [
         aws_kms_key.neptune.arn,
       ]
-      conditions = []
     },
     {
       actions = [
@@ -480,7 +452,6 @@ module "sagemaker_execution" {
       resources = [
         module.neptune_ml_iam.role_arn,
       ]
-      conditions = []
     },
   ]
 
@@ -503,7 +474,6 @@ module "lambda_execution" {
       resources = [
         "${local.iam_logs_prefix}:*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -514,7 +484,6 @@ module "lambda_execution" {
       resources = [
         "${local.iam_logs_prefix}:log-group:/aws/lambda/*:*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -523,7 +492,6 @@ module "lambda_execution" {
       resources = [
         "*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -532,7 +500,6 @@ module "lambda_execution" {
       resources = [
         "*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -543,7 +510,6 @@ module "lambda_execution" {
       resources = [
         "*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -553,7 +519,6 @@ module "lambda_execution" {
         "${local.iam_batch_prefix}:job-definition/${aws_batch_job_definition.neptune.name}",
         "${aws_batch_job_queue.neptune.arn}*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -563,7 +528,6 @@ module "lambda_execution" {
         "${local.iam_batch_prefix}:job/${aws_batch_job_definition.neptune.name}*",
         "${aws_batch_job_queue.neptune.arn}*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -574,7 +538,6 @@ module "lambda_execution" {
       resources = [
         aws_kms_key.neptune.arn,
       ]
-      conditions = []
     },
   ]
 
@@ -611,7 +574,6 @@ module "neptune_user" {
       resources = [
         "${local.neptune_cluster_resource_arn}/*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -626,7 +588,6 @@ module "neptune_user" {
       resources = [
         aws_sagemaker_notebook_instance.neptune.arn,
       ]
-      conditions = []
     },
     {
       actions = [
@@ -639,7 +600,6 @@ module "neptune_user" {
         aws_s3_bucket.neptune.arn,
         "${aws_s3_bucket.neptune.arn}/*",
       ]
-      conditions = []
     },
     {
       actions = [
@@ -650,7 +610,6 @@ module "neptune_user" {
       resources = [
         aws_kms_key.neptune.arn,
       ]
-      conditions = []
     },
   ]
 

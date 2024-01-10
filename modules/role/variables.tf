@@ -13,11 +13,11 @@ variable "statements" {
   type = list(object({
     actions   = list(string)
     resources = list(string)
-    conditions = list(object({
+    conditions = optional(list(object({
       test     = string
       variable = string
       values   = list(string)
-    }))
+    })), [])
   }))
   nullable = false
   default  = []
