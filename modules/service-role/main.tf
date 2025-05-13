@@ -1,19 +1,26 @@
+
 resource "aws_iam_role" "this" {
   name               = "${var.role_name}Role"
   assume_role_policy = data.aws_iam_policy_document.trust_policy.json
 
-  dynamic "inline_policy" {
-    for_each = data.aws_iam_policy_document.access_policy
-    content {
-      name   = "${var.role_name}Policy"
-      policy = inline_policy.value.json
-    }
-  }
-
   tags = var.tags
 }
 
+resource "aws_iam_policy" "this" {
+  count = length(var.statements) > 0 ? 1 : 0
+
+  name   = "${var.role_name}Policy"
+  policy = data.aws_iam_policy_document.access_policy[0].json
+}
+
 resource "aws_iam_role_policy_attachment" "this" {
+  count = length(var.statements) > 0 ? 1 : 0
+
+  role       = aws_iam_role.this.name
+  policy_arn = aws_iam_policy.this[0].arn
+}
+
+resource "aws_iam_role_policy_attachment" "managed" {
   count = length(var.aws_managed_policy_name) > 0 ? 1 : 0
 
   role       = aws_iam_role.this.name
