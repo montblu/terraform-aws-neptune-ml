@@ -1,14 +1,14 @@
 locals {
-  identifier = coalesce(var.resource_group_name, random_id.this.hex)
+  identifier = coalesce(var.resource_group_name, "neptune-${random_id.this.hex}")
 
   account_id = data.aws_caller_identity.this.account_id
 
   aws_region = data.aws_region.this.name
 
-  database_name = "neptune-${local.identifier}"
+  database_name = local.identifier
 
   final_snapshot_identifier = (
-    local.identifier == random_id.this.hex
+    local.identifier == "neptune-${random_id.this.hex}"
     ? "${local.database_name}-final-snapshot"
     : "${local.database_name}-final-snapshot-${random_id.this.hex}"
   )
