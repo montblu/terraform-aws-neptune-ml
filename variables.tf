@@ -113,6 +113,15 @@ variable "neptune_port" {
   default     = 8182
 }
 
+variable "neptune_backup_retention_period" {
+  description = <<-EOF
+    The days to retain backups for.
+    EOF
+  type        = number
+  nullable    = false
+  default     = 1
+}
+
 variable "neptune_backup_window" {
   description = <<-EOF
     Window of time to run backups of Neptune cluster.
@@ -148,6 +157,15 @@ variable "neptune_iam_authentication" {
   type        = bool
   nullable    = false
   default     = false
+}
+
+variable "neptune_storage_type" {
+  description = <<-EOF
+    storage_type - Storage type associated with the cluster `standard/iopt1`.
+    EOF
+  type        = string
+  nullable    = false
+  default     = "standard"
 }
 
 variable "serverless_min_capacity" {

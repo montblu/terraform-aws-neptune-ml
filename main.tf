@@ -214,7 +214,7 @@ resource "aws_neptune_cluster" "neptune" {
   engine_version     = var.neptune_engine_version
   port               = var.neptune_port
 
-  backup_retention_period = 30
+  backup_retention_period = var.neptune_backup_retention_period
   preferred_backup_window = var.neptune_backup_window
 
   allow_major_version_upgrade  = var.neptune_allow_major_version_upgrade
@@ -224,6 +224,7 @@ resource "aws_neptune_cluster" "neptune" {
   skip_final_snapshot       = var.neptune_skip_final_snapshot
   final_snapshot_identifier = local.final_snapshot_identifier
 
+  storage_type      = var.neptune_storage_type
   storage_encrypted = true
   kms_key_arn       = aws_kms_key.neptune.arn
 
