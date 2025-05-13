@@ -38,18 +38,18 @@ locals {
 
   sagemaker_notebook_startup_script = <<-SCRIPT
     #!/usr/bin/env bash
-    sudo --user ec2-user --login <<EOF
+    sudo -u ec2-user -i <<'EOF'
 
     echo "export GRAPH_NOTEBOOK_AUTH_MODE=DEFAULT" >> ~/.bashrc
     echo "export GRAPH_NOTEBOOK_IAM_PROVIDER=ROLE" >> ~/.bashrc
     echo "export GRAPH_NOTEBOOK_SSL=True" >> ~/.bashrc
+    echo "export GRAPH_NOTEBOOK_SERVICE=neptune-db" >> ~/.bashrc
     echo "export GRAPH_NOTEBOOK_HOST=${aws_neptune_cluster.neptune.endpoint}" >> ~/.bashrc
     echo "export GRAPH_NOTEBOOK_PORT=${aws_neptune_cluster.neptune.port}" >> ~/.bashrc
     echo "export NEPTUNE_LOAD_FROM_S3_ROLE_ARN=${module.s3.role_arn}" >> ~/.bashrc
     echo "export AWS_REGION=${local.aws_region}" >> ~/.bashrc
 
     echo "export NEPTUNE_ML_ROLE_ARN=${module.neptune_ml_iam.role_arn}" >> ~/.bashrc
-
     echo "export NEPTUNE_EXPORT_API_URI=${aws_api_gateway_stage.neptune_export.invoke_url}${module.neptune_export_gateway.uri}" >> ~/.bashrc
 
     aws s3 cp s3://aws-neptune-notebook/graph_notebook.tar.gz /tmp/graph_notebook.tar.gz

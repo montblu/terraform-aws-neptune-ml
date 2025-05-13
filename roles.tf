@@ -426,6 +426,7 @@ module "sagemaker_execution" {
         "sagemaker:DescribeModel",
         "sagemaker:DescribeEndpointConfig",
         "sagemaker:DescribeEndpoint",
+        "sagemaker:DescribeNotebookInstance",
         "sagemaker:DeleteModel",
         "sagemaker:DeleteEndpointConfig",
         "sagemaker:DeleteEndpoint",

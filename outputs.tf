@@ -37,7 +37,7 @@ output "neptune_cluster_endpoint" {
   description = <<-EOF
     URL of the Neptune cluster
     EOF
-  value       = local.neptune_endpoint
+  value       = aws_neptune_cluster.neptune.endpoint
 }
 
 output "neptune_cluster_reader_endpoint" {
@@ -45,6 +45,13 @@ output "neptune_cluster_reader_endpoint" {
     URL of read-only endpoint of the Neptune cluster
     EOF
   value       = aws_neptune_cluster.neptune.reader_endpoint
+}
+
+output "neptune_cluster_port" {
+  description = <<-EOF
+    The port on which the Neptune accepts connections
+    EOF
+  value       = aws_neptune_cluster.neptune.port
 }
 
 output "neptune_cluster_subnet_group_id" {
