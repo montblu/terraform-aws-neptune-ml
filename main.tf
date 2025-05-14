@@ -223,6 +223,7 @@ resource "aws_neptune_cluster" "neptune" {
 
   skip_final_snapshot       = var.neptune_skip_final_snapshot
   final_snapshot_identifier = local.final_snapshot_identifier
+  deletion_protection       = var.neptune_deletion_protection
 
   storage_type      = var.neptune_storage_type
   storage_encrypted = true

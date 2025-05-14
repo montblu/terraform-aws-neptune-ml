@@ -104,6 +104,15 @@ variable "neptune_skip_final_snapshot" {
   default     = false
 }
 
+variable "neptune_deletion_protection" {
+  description = <<-EOF
+    A value that indicates whether the DB cluster has deletion protection enabled.The database can't be deleted when deletion protection is enabled.
+    EOF
+  type        = bool
+  nullable    = false
+  default     = false
+}
+
 variable "neptune_port" {
   description = <<-EOF
     The port which Neptune will expose.
