@@ -265,7 +265,7 @@ resource "aws_neptune_cluster_instance" "neptune" {
   count = var.cluster_instance_count
 
   identifier         = "${local.database_name}-${count.index + 1}"
-  instance_class     = var.cluster_instance_auto_minor_version_upgrade
+  instance_class     = var.database_instance_type
   cluster_identifier = aws_neptune_cluster.neptune.id
   engine             = aws_neptune_cluster.neptune.engine
   port               = aws_neptune_cluster.neptune.port
@@ -278,7 +278,7 @@ resource "aws_neptune_cluster_instance" "neptune" {
 
   apply_immediately            = false
   preferred_maintenance_window = aws_neptune_cluster.neptune.preferred_maintenance_window
-  auto_minor_version_upgrade   = var.neptune_auto_minor_version_upgrade
+  auto_minor_version_upgrade   = var.cluster_instance_auto_minor_version_upgrade
 
   tags = var.tags
 }
