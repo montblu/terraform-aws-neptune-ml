@@ -221,10 +221,10 @@ resource "aws_neptune_cluster" "neptune" {
   apply_immediately            = var.neptune_apply_immediately
   preferred_maintenance_window = var.neptune_maintenance_window
 
-  skip_final_snapshot           = var.neptune_skip_final_snapshot
-  final_snapshot_identifier     = local.final_snapshot_identifier
-  neptune_copy_tags_to_snapshot = var.neptune_copy_tags_to_snapshot
-  deletion_protection           = var.neptune_deletion_protection
+  skip_final_snapshot       = var.neptune_skip_final_snapshot
+  final_snapshot_identifier = local.final_snapshot_identifier
+  copy_tags_to_snapshot     = var.neptune_copy_tags_to_snapshot
+  deletion_protection       = var.neptune_deletion_protection
 
   storage_type      = var.neptune_storage_type
   storage_encrypted = true
