@@ -255,11 +255,7 @@ variable "instance_parameter_group" {
     EOF
   type        = map(any)
   nullable    = false
-  default = {
-    neptune_dfe_query_engine = "viaQueryHint"
-    neptune_query_timeout    = 120000
-    neptune_result_cache     = 0
-  }
+  default     = {}
 }
 
 variable "sagemaker_notebook_platform_id" {
