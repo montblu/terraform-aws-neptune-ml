@@ -222,6 +222,15 @@ variable "cluster_instance_count" {
   default     = 1
 }
 
+variable "cluster_instance_auto_minor_version_upgrade" {
+  description = <<-EOF
+    Indicates that minor engine upgrades will be applied automatically to the instance during the maintenance window.
+    EOF
+  type        = bool
+  nullable    = false
+  default     = true
+}
+
 variable "cluster_parameter_group" {
   # https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html
   description = <<-EOF
