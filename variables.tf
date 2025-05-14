@@ -104,6 +104,15 @@ variable "neptune_skip_final_snapshot" {
   default     = false
 }
 
+variable "neptune_copy_tags_to_snapshot" {
+  description = <<-EOF
+    If set to true, tags are copied to any snapshot of the DB cluster that is created.
+    EOF
+  type        = bool
+  nullable    = false
+  default     = true
+}
+
 variable "neptune_deletion_protection" {
   description = <<-EOF
     A value that indicates whether the DB cluster has deletion protection enabled.The database can't be deleted when deletion protection is enabled.
