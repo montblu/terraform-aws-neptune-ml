@@ -6,6 +6,8 @@ resource "random_id" "this" {
 #               KMS              #
 ##################################
 resource "aws_kms_key" "neptune" {
+  count = var.create_kms_key ? 1 : 0
+
   description             = "Encryption key for Neptune ML"
   deletion_window_in_days = 7
   enable_key_rotation     = true
@@ -13,8 +15,10 @@ resource "aws_kms_key" "neptune" {
 }
 
 resource "aws_kms_alias" "neptune" {
+  count = var.create_kms_key ? 1 : 0
+
   name          = "alias/${local.database_name}"
-  target_key_id = aws_kms_key.neptune.id
+  target_key_id = aws_kms_key.neptune[0].id
 }
 
 ####################################
@@ -41,7 +45,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "neptune" {
     bucket_key_enabled = true
 
     apply_server_side_encryption_by_default {
-      kms_master_key_id = aws_kms_key.neptune.arn
+      kms_master_key_id = var.create_kms_key ? aws_kms_key.neptune[0].arn : data.aws_kms_key.s3[0].arn
       sse_algorithm     = "aws:kms"
     }
   }
@@ -168,7 +172,7 @@ resource "aws_security_group" "batch" {
 resource "aws_cloudwatch_log_group" "neptune" {
   name              = "/aws/neptune/${local.database_name}/audit"
   retention_in_days = 90
-  kms_key_id        = aws_kms_key.neptune.arn
+  kms_key_id        = var.create_kms_key ? aws_kms_key.neptune[0].arn : null
   tags              = var.tags
 }
 
@@ -228,7 +232,7 @@ resource "aws_neptune_cluster" "neptune" {
 
   storage_type      = var.neptune_storage_type
   storage_encrypted = true
-  kms_key_arn       = aws_kms_key.neptune.arn
+  kms_key_arn       = var.create_kms_key ? aws_kms_key.neptune[0].arn : data.aws_kms_key.rds[0].arn
 
   neptune_subnet_group_name = aws_neptune_subnet_group.neptune.id
 
@@ -289,7 +293,7 @@ resource "aws_neptune_cluster_instance" "neptune" {
 resource "aws_cloudwatch_log_group" "api_gateway" {
   name              = "/aws/apigateway/neptune-export/v1"
   retention_in_days = 90
-  kms_key_id        = aws_kms_key.neptune.arn
+  kms_key_id        = var.create_kms_key ? aws_kms_key.neptune[0].arn : null
   tags              = var.tags
 }
 
@@ -417,7 +421,7 @@ module "neptune_export_lambda" {
   lambda_name               = "neptune-export-${local.identifier}"
   lambda_handler            = "neptune_export_lambda.lambda_handler"
   lambda_role_arn           = module.lambda_execution.role_arn
-  kms_key_arn               = aws_kms_key.neptune.arn
+  kms_key_arn               = var.create_kms_key ? aws_kms_key.neptune[0].arn : data.aws_kms_key.lambda[0].arn
   lambda_source_key         = "neptune-export/install/lambda/neptune_export_lambda.zip"
   permitted_api_gateway_arn = aws_api_gateway_rest_api.neptune_export.execution_arn
 
@@ -436,7 +440,7 @@ module "neptune_export_status_lambda" {
   lambda_name               = "neptune-export-status-${local.identifier}"
   lambda_handler            = "neptune_export_status_lambda.lambda_handler"
   lambda_role_arn           = module.lambda_execution.role_arn
-  kms_key_arn               = aws_kms_key.neptune.arn
+  kms_key_arn               = var.create_kms_key ? aws_kms_key.neptune[0].arn : data.aws_kms_key.lambda[0].arn
   lambda_source_key         = "neptune-export/install/lambda/neptune_export_lambda.zip"
   permitted_api_gateway_arn = aws_api_gateway_rest_api.neptune_export.execution_arn
 
@@ -454,7 +458,7 @@ module "neptune_export_status_lambda" {
 resource "aws_cloudwatch_log_group" "batch" {
   name              = "/aws/batch/job"
   retention_in_days = 90
-  kms_key_id        = aws_kms_key.neptune.arn
+  kms_key_id        = var.create_kms_key ? aws_kms_key.neptune[0].arn : null
   tags              = var.tags
 }
 
@@ -598,13 +602,13 @@ resource "aws_batch_job_definition" "neptune" {
 resource "aws_cloudwatch_log_group" "sagemaker_notebook" {
   name              = "/aws/sagemaker/NotebookInstances"
   retention_in_days = 90
-  kms_key_id        = aws_kms_key.neptune.arn
+  kms_key_id        = var.create_kms_key ? aws_kms_key.neptune[0].arn : null
 }
 
 resource "aws_cloudwatch_log_group" "sagemaker_processing" {
   name              = "/aws/sagemaker/ProcessingJobs"
   retention_in_days = 90
-  kms_key_id        = aws_kms_key.neptune.arn
+  kms_key_id        = var.create_kms_key ? aws_kms_key.neptune[0].arn : null
 }
 
 resource "aws_sagemaker_notebook_instance_lifecycle_configuration" "neptune" {
@@ -622,7 +626,7 @@ resource "aws_sagemaker_notebook_instance" "neptune" {
   role_arn              = module.sagemaker_execution.role_arn
   instance_type         = var.sagemaker_notebook_instance_type
   platform_identifier   = var.sagemaker_notebook_platform_id
-  kms_key_id            = aws_kms_key.neptune.id
+  kms_key_id            = var.create_kms_key ? aws_kms_key.neptune[0].arn : data.aws_kms_key.s3[0].arn
   lifecycle_config_name = aws_sagemaker_notebook_instance_lifecycle_configuration.neptune.name
   subnet_id             = var.neptune_subnet_ids[0]
 

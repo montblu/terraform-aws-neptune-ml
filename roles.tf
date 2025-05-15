@@ -22,7 +22,7 @@ module "s3" {
         "kms:Decrypt",
       ]
       resources = [
-        aws_kms_key.neptune.arn,
+        var.create_kms_key ? aws_kms_key.neptune[0].arn : data.aws_kms_key.s3[0].arn
       ]
     },
   ]
@@ -121,7 +121,7 @@ module "batch_execution" {
         "kms:GenerateDataKey*",
       ]
       resources = [
-        aws_kms_key.neptune.arn,
+        var.create_kms_key ? aws_kms_key.neptune[0].arn : "*"
       ]
     },
   ]
@@ -196,7 +196,7 @@ module "batch_job" {
         "kms:Encrypt",
       ]
       resources = [
-        aws_kms_key.neptune.arn,
+        var.create_kms_key ? aws_kms_key.neptune[0].arn : "*"
       ]
     },
     {
@@ -279,7 +279,7 @@ module "neptune_ml_iam" {
         "kms:GenerateDataKey*",
       ],
       resources = [
-        aws_kms_key.neptune.arn,
+        var.create_kms_key ? aws_kms_key.neptune[0].arn : "*"
       ]
     },
     {
@@ -443,7 +443,7 @@ module "sagemaker_execution" {
         "kms:GenerateDataKey*",
       ]
       resources = [
-        aws_kms_key.neptune.arn,
+        var.create_kms_key ? aws_kms_key.neptune[0].arn : "*"
       ]
     },
     {
@@ -537,7 +537,7 @@ module "lambda_execution" {
         "kms:GenerateDataKey*",
       ]
       resources = [
-        aws_kms_key.neptune.arn,
+        var.create_kms_key ? aws_kms_key.neptune[0].arn : "*"
       ]
     },
   ]
@@ -609,7 +609,7 @@ module "neptune_user" {
         "kms:GenerateDataKey*",
       ]
       resources = [
-        aws_kms_key.neptune.arn,
+        var.create_kms_key ? aws_kms_key.neptune[0].arn : "*"
       ]
     },
   ]

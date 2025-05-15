@@ -16,3 +16,18 @@ data "aws_iam_role" "admin" {
   count = length(var.kms_admin_role_names)
   name  = var.kms_admin_role_names[count.index]
 }
+
+data "aws_kms_key" "s3" {
+  count  = var.create_kms_key ? 0 : 1
+  key_id = "alias/aws/s3"
+}
+
+data "aws_kms_key" "rds" {
+  count  = var.create_kms_key ? 0 : 1
+  key_id = "alias/aws/rds"
+}
+
+data "aws_kms_key" "lambda" {
+  count  = var.create_kms_key ? 0 : 1
+  key_id = "alias/aws/lambda"
+}

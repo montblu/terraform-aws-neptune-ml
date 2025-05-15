@@ -56,6 +56,15 @@ variable "extra_subnet_ids" {
   default     = []
 }
 
+variable "create_kms_key" {
+  description = <<-EOF
+    Create a new kms key. If false, use aws managed keys instead.
+    EOF
+  type        = bool
+  nullable    = false
+  default     = true
+}
+
 variable "kms_admin_user_names" {
   description = <<-EOF
     Names of additional IAM users that will be administrators of the

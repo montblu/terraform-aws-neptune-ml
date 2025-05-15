@@ -2,7 +2,7 @@ output "kms_key_arn" {
   description = <<-EOF
     ARN of KMS key used for encrypting data created by Neptune ML resources
     EOF
-  value       = aws_kms_key.neptune.arn
+  value       = try(aws_kms_key.neptune[0].arn, "")
 }
 
 output "s3_bucket_name" {
