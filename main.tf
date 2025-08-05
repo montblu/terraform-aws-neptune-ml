@@ -495,9 +495,9 @@ resource "aws_launch_template" "batch" {
 }
 
 resource "aws_batch_compute_environment" "neptune" {
-  compute_environment_name = "neptune-export-${local.identifier}"
-  service_role             = module.batch_execution.role_arn
-  type                     = "MANAGED"
+  name         = "neptune-export-${local.identifier}"
+  service_role = module.batch_execution.role_arn
+  type         = "MANAGED"
 
   compute_resources {
     instance_role = module.ec2.instance_profile_arn
