@@ -264,7 +264,7 @@ variable "sagemaker_notebook_platform_id" {
     EOF
   type        = string
   nullable    = false
-  default     = "notebook-al2-v2"
+  default     = "notebook-al2023-v1"
 }
 
 variable "sagemaker_notebook_instance_type" {
