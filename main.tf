@@ -631,7 +631,7 @@ resource "aws_sagemaker_notebook_instance" "neptune" {
   ]
 
   instance_metadata_service_configuration {
-    minimum_instance_metadata_service_version = "1"
+    minimum_instance_metadata_service_version = "2"
   }
 
   tags = var.tags
