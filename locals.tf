@@ -40,8 +40,7 @@ locals {
     #!/usr/bin/env bash
     sudo -u ec2-user -i <<'EOF'
 
-    echo "export GRAPH_NOTEBOOK_AUTH_MODE=DEFAULT" >> ~/.bashrc
-    echo "export GRAPH_NOTEBOOK_IAM_PROVIDER=ROLE" >> ~/.bashrc
+    echo "export GRAPH_NOTEBOOK_AUTH_MODE=IAM" >> ~/.bashrc
     echo "export GRAPH_NOTEBOOK_SSL=True" >> ~/.bashrc
     echo "export GRAPH_NOTEBOOK_SERVICE=neptune-db" >> ~/.bashrc
     echo "export GRAPH_NOTEBOOK_HOST=${aws_neptune_cluster.neptune.endpoint}" >> ~/.bashrc
@@ -55,7 +54,7 @@ locals {
     aws s3 cp s3://aws-neptune-notebook/graph_notebook.tar.gz /tmp/graph_notebook.tar.gz
     rm -rf /tmp/graph_notebook
     tar -zxvf /tmp/graph_notebook.tar.gz -C /tmp
-    /tmp/graph_notebook/install.sh
+    /tmp/graph_notebook/install_jl4x.sh
     EOF
     SCRIPT
 
